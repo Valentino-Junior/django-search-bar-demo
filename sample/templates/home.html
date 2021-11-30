@@ -1,0 +1,54 @@
+{%extends "base.html"%}
+
+
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+    {% if posts%}
+      <h4>Found {{ posts|length }} of searched term {{message}}</h4>
+    {% else %}
+      <h2> Found 0 posts for the search term {{message}}</h2>
+    {% endif %}
+
+    </div>
+  <h1 class="text-center">SCIENCE FACTS</h1><br>
+
+    {% for post in posts %}
+    
+    
+    <h1>{{forloop.counter}}.{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <p>Date Created: {{post.date_created|date:'F d, Y'}}</p>
+    <p>Date Created: {{post.date_created}}</p>
+
+    <p>Last Update: {{post.date_updated|timesince}}</p>
+
+    <form action="{% url 'welcome' %}" enctype="multipart/form-data" method="POST">
+      {% csrf_token %} 
+      <input type="file" name = "pic" required>
+      <button class = 'btn btn-secondary' type="submit">Submit</button>
+      
+    </form>
+
+    {% empty %}
+    <div class="row">
+      <h2 class="text-center">There No Search Scienfic Facts Posts</h2>
+    </div>
+    
+    
+    {% endfor %}
+
+    
+</div>
+</body>
+</html>
+{%endblock%}
