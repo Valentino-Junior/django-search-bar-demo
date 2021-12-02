@@ -12,11 +12,11 @@ def welcome(request):
     # posts = Post.objects.all()
         posts = Post.objects.all().order_by('-date_created')
 
-    if request.method == 'POST':
-        new_img =Post(
-         science_image = request.FILES['pic']   
-        )
-        new_img.save()
+    # if request.method == 'POST':
+    #     new_img =Post(
+    #      science_image = request.FILES['pic']   
+    #     )
+    #     new_img.save()
 
     return render (request,'home.html', {'posts':posts},)
 
